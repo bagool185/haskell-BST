@@ -47,14 +47,7 @@ boundedBST low high =
             rightChild <- boundedBST (succ key) high
             return $ InternalNode key (show key) leftChild rightChild
         ]
-
-insertLookup :: (Int, String) -> BST -> Bool
-insertLookup (key, item) tree = isJust $ BST.lookup key $ BST.insert tree (key, item)
-
-insertValid :: (Int, String) -> BST -> Bool 
-insertValid (key, item) tree = isBST $ BST.insert tree (key, item)
-
-prop_isBSTAfterInsertion :: (Int, String) -> BST -> Bool  
+prop_isBSTAfterInsertion :: (Int, String) -> BST -> Bool 
 prop_isBSTAfterInsertion (key, item) tree = isBST $ BST.insert tree (key, item)
 
 prop_isBSTAfterDeletion :: Int -> BST -> Property 
