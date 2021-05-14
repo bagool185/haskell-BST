@@ -1,8 +1,8 @@
 module DeleteTests (deleteTests) where 
     
-import Test.HUnit
-import BST
-import Mocks
+import Test.HUnit ( assertEqual, Test(TestLabel, TestCase) )
+import BST ( delete, BST(Leaf, InternalNode) )
+import Mocks ( mockTree )
 
 deleteLeaf :: Test
 deleteLeaf = TestCase (assertEqual

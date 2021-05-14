@@ -1,8 +1,8 @@
-import InsertTests
-import LookupTests
-import DisplayTests
-import DeleteTests
-import PropertyTests
+import InsertTests ( insertTests )
+import LookupTests ( lookupTests )
+import DisplayTests ( displayTests )
+import DeleteTests ( deleteTests )
+import PropertyTests ( runPropertyTests )
 
 import BST
 import Test.HUnit

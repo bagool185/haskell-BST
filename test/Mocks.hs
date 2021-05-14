@@ -1,6 +1,6 @@
 module Mocks(mockTree) where
 
-import BST
+import BST ( BST(..) )
 
 mockTree :: BST
 mockTree = InternalNode 5 "root"

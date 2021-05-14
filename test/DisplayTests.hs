@@ -1,7 +1,7 @@
 module DisplayTests (displayTests) where
     
-import Test.HUnit
-import BST 
+import Test.HUnit ( assertEqual, Test(TestLabel, TestCase) )
+import BST ( displayInOrder, emptyBST, BST(Leaf, InternalNode) ) 
 
 testDisplayInOrder :: Test
 testDisplayInOrder = TestCase (assertEqual

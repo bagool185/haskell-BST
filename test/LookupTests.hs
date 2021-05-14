@@ -1,8 +1,8 @@
 module LookupTests (lookupTests) where 
 
-import Test.HUnit
-import BST 
-import Mocks
+import Test.HUnit ( assertEqual, Test(TestLabel, TestCase) )
+import BST ( lookup ) 
+import Mocks ( mockTree )
 
 lookupRoot :: Test
 lookupRoot = TestCase (assertEqual

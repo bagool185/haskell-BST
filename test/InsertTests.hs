@@ -3,8 +3,8 @@ module InsertTests (
   ) where
 
 
-import Test.HUnit
-import BST
+import Test.HUnit ( assertEqual, Test(TestLabel, TestCase) )
+import BST ( insert, BST(Leaf, InternalNode) )
 
 insertNodeInEmptyTree :: Test
 insertNodeInEmptyTree = TestCase (assertEqual
