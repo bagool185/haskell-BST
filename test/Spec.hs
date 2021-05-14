@@ -53,18 +53,21 @@ deleteLeaf :: Test
 deleteLeaf = TestCase (assertEqual
     "it should delete the leaf node with the given key from the tree"
     (InternalNode 1 "test" Leaf Leaf)
-    (BST.delete (InternalNode 1 "test" (InternalNode 2 "test2" Leaf Leaf) Leaf) 2)
+    (BST.delete (InternalNode 1 "test" Leaf (InternalNode 2 "test2" Leaf Leaf)) 2)
     )
 
 deleteRoot :: Test
 deleteRoot = TestCase (assertEqual
-    "it should delete the root and set the leftmost child as the new root"
-    (InternalNode (-1) "leftmost child" Leaf (InternalNode 2 "bigger child" Leaf Leaf))
-    (BST.delete (InternalNode 1 "original root"
-                    (InternalNode (-1) "leftmost child" Leaf Leaf)
-                    (InternalNode 2 "bigger child" Leaf Leaf)
-                )
-                1)
+    "it should delete the root and set the leftmost item in the right subtree as the new root"
+    (InternalNode 2 "right child" (InternalNode (-1) "left child" Leaf Leaf) Leaf)
+        (BST.delete 
+            (
+                InternalNode 1 "original root"
+                    (InternalNode (-1) "left child" Leaf Leaf)
+                    (InternalNode 2 "right child" Leaf Leaf)
+            )
+            1
+        )
     )
 
 deleteRootOnlyRightChild :: Test
@@ -73,22 +76,35 @@ deleteRootOnlyRightChild = TestCase (assertEqual
     (InternalNode 2 "right child" Leaf Leaf)
     (BST.delete (InternalNode 1 "original root"
                     Leaf
-                    (InternalNode 2 "bigger child" Leaf Leaf)
+                    (InternalNode 2 "right child" Leaf Leaf)
+                )
+                1)
+    )
+
+deleteRootOnlyLeftChild :: Test
+deleteRootOnlyLeftChild = TestCase (assertEqual
+    "it should delete the root and set the left child as the new root"
+    (InternalNode 2 "left child" Leaf Leaf)
+    (BST.delete (InternalNode 3 "original root"
+                    (InternalNode 2 "left child" Leaf Leaf)
+                    Leaf
                 )
                 1)
     )
 
 -- expected tree
 --    5
---  2   6
---   4
+--  4   6
+-- 2 
 deleteInnerChild :: Test
 deleteInnerChild = TestCase (assertEqual
     "it should delete the node and replace it with its leftmost child"
     (InternalNode 5 "root"
-        (InternalNode 2 "node2"
-            Leaf
-            (InternalNode 4 "node4" Leaf Leaf))
+        (
+            InternalNode 4 "node4"
+                (InternalNode 2 "node2" Leaf Leaf)
+                Leaf
+        )
         (InternalNode 6 "node6" Leaf Leaf) )
 
     (BST.delete mockTree 3)

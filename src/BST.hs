@@ -44,20 +44,21 @@ insert (InternalNode key item leftChild rightChild) (newKey, newItem)
 delete :: BST -> Int -> BST
 delete Leaf _ = Leaf
 delete (InternalNode key item leftChild rightChild) soughtKey
-  | key == soughtKey = deleteRoot(InternalNode key item leftChild rightChild)
+  | key == soughtKey = deleteSubtreeRoot(InternalNode key item leftChild rightChild)
   | key > soughtKey = InternalNode key item (delete leftChild soughtKey) rightChild
   | key < soughtKey = InternalNode key item leftChild (delete rightChild soughtKey)
 
-deleteRoot :: BST -> BST
-deleteRoot (InternalNode key item Leaf rightChild) = rightChild
-deleteRoot (InternalNode key item leftChild Leaf) = leftChild
-deleteRoot (InternalNode key item leftChild rightChild) = InternalNode newKey newItem leftChild rightChild
+deleteSubtreeRoot :: BST -> BST
+deleteSubtreeRoot (InternalNode key item Leaf Leaf) = Leaf
+deleteSubtreeRoot (InternalNode key item Leaf rightChild) = rightChild
+deleteSubtreeRoot (InternalNode key item leftChild Leaf) = leftChild
+deleteSubtreeRoot (InternalNode key item leftChild rightChild) = InternalNode newKey newItem leftChild Leaf
                   where
-                    (newKey, newItem) = getLeftMostElement rightChild
+                    (newKey, newItem) = getLeftMostElementOfRightSubtree rightChild
 
-getLeftMostElement :: BST -> (Int, String)
-getLeftMostElement (InternalNode key item Leaf _) = (key, item)
-getLeftMostElement (InternalNode _ _ leftChild _) = getLeftMostElement leftChild
+getLeftMostElementOfRightSubtree :: BST -> (Int, String)
+getLeftMostElementOfRightSubtree (InternalNode key item Leaf _) = (key, item)
+getLeftMostElementOfRightSubtree (InternalNode _ _ leftChild _) = getLeftMostElementOfRightSubtree leftChild
 
 isLeaf :: BST -> Bool
 isLeaf Leaf             = True
