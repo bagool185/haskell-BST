@@ -53,7 +53,7 @@ deleteRootOnlyLeftChild = TestCase (assertEqual
 -- 2 
 deleteInnerChild :: Test
 deleteInnerChild = TestCase (assertEqual
-    "it should delete the node and replace it with its leftmost child"
+    "it should delete the node and replace it with its right sub-tree's leftmost child"
     (InternalNode 5 "root"
         (
             InternalNode 4 "node4"
