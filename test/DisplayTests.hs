@@ -5,7 +5,7 @@ import BST ( displayInOrder, emptyBST, BST(Leaf, InternalNode) )
 
 testDisplayInOrder :: Test
 testDisplayInOrder = TestCase (assertEqual
-    "it should return a sorted list of strings"
+    "it should return a list of strings sorted by their keys"
     ["a", "b", "c"]
     (BST.displayInOrder
         (InternalNode 2 "b"

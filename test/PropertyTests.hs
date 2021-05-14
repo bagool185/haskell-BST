@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module PropertyTests (runPropertyTests) where
 
-import BST ( delete, insert, lookup, BST(..) )
+import BST ( delete, insert, lookup, BST(..), displayInOrder )
 import Test.HUnit ()
 import Test.QuickCheck
     ( quickCheckAll,
@@ -14,11 +14,6 @@ import Test.QuickCheck
 
 import Data.Maybe ( isJust, isNothing )
 
-
-isSorted :: (Ord a) => [a] -> Bool
-isSorted [] = True
-isSorted [x] = True
-isSorted (x:y:xs) = (x <= y) && isSorted (y:xs)
 
 maxInt :: BST -> Int 
 maxInt Leaf = minBound
