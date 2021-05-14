@@ -3,7 +3,8 @@ module BST (
   lookup, 
   emptyBST, 
   insert, 
-  delete
+  delete,
+  displayInOrder
   ) where
 
 import Prelude hiding (lookup)
